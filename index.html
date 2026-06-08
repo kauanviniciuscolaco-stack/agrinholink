@@ -1,0 +1,41 @@
+import random
+import time
+
+def verificar_sensor_umidade():
+    # Simula a leitura de um sensor de umidade do solo (em porcentagem)
+    return random.randint(20, 80)
+
+def verificar_previsao_chuva():
+    # Simula a probabilidade de chuva para as próximas horas (em porcentagem)
+    return random.randint(0, 100)
+
+def gerenciar_irrigacao():
+    print("--- INICIANDO ANÁLISE DO SISTEMA AGRO SUSTENTÁVEL ---")
+    
+    umidade = verificar_sensor_umidade()
+    chuva = verificar_previsao_chuva()
+    
+    print(f"Umidade atual do solo: {umidade}%")
+    print(f"Probabilidade de chuva hoje: {chuva}%")
+    
+    # Limites sustentáveis
+    LIMITE_SECO = 40       # Solo precisa de água se estiver abaixo disso
+    CHANCE_CHUVA_ALTA = 70  # Se a chance de chuva for alta, economiza-se água da irrigação
+    
+    print("\n[Decisão do Sistema]:")
+    if umidade < LIMITE_SECO:
+        if chuva >= CHANCE_CHUVA_ALTA:
+            print("Status: Solo seco, mas há alta probabilidade de chuva iminente.")
+            print("Ação: Irrigação SUSPENSA temporariamente para economizar água da reserva.")
+        else:
+            print("Status: Solo seco e sem previsão de chuva abundante.")
+            print("Ação: Irrigação ATIVADA. Liberando quantidade controlada de água.")
+    else:
+        print("Status: Solo com umidade adequada.")
+        print("Ação: Irrigação DESLIGADA para evitar desperdício e saturação do solo.")
+    print("-" * 50)
+
+# Simula o sistema rodando (3 verificações seguidas)
+for i in range(3):
+    gerenciar_irrigacao()
+    time.sleep(2)  # Pausa de 2 segundos entre as leituras
